@@ -1,0 +1,32 @@
+body {
+  background-color: grey;
+}
+
+#center {
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #fff;
+}
+
+#container {
+  margin: 0 auto;
+}
+
+button {
+  padding: 10px 5px;
+  border-radius: 8px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: black;
+  color: aliceblue;
+}
+
+
+tr, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+
+}
