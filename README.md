@@ -6,6 +6,8 @@ This app was built with Puppeteer. Predict app is an app designed to predict cer
 
 ## HOW TO USE
 
+* cd into directory
+
 * Install Puppeteer: npm i puppeteer
 
 * Run: node app.js
