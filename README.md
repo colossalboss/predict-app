@@ -12,6 +12,6 @@ This app was built with Puppeteer. Predict app is an app designed to predict cer
 
 * Run: node app.js
 
-After running app.js in the terminal it creates some txt file, then you can open index.html in chrome and click on the buttons to see predictions provided by the app.
+After running app.js in the terminal it creates some txt file, then you can open index.html in chrome web server and click on the buttons to see predictions provided by the app.
 
 Note: if running 'node app.js' in terminal starts but doesn't complete, no worries you will still get the predictions it generated, just open index.html and click on buttons to see predictions.
