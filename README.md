@@ -1,10 +1,10 @@
 ## PREDICT APP
 
-##DESCRIPTION
+## DESCRIPTION
 
 This app was built with Puppeteer. Predict app is an app designed to predict certain outcomes in a football match using available statistics, the main information it uses is the heah-to-head of the teams (their previous meetings). It analyzes these information and decides if or not both teams will score in the match and also if or not the total goals will be more than 2.
 
-##HOW TO USE
+## HOW TO USE
 
 * Install Puppeteer: npm i puppeteer
 
