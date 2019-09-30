@@ -12,36 +12,26 @@ const fs = require('fs');
     mightUnders: []
   };
 
-  // let overs = [];
-  // let myOvers = [];
-  // let myUnders = []
-  // let mightOvers = []
-  // let mightUnders = []
-  // let myBts = []
-  // let myNoBts = []
-  // let mightBts = []
-  // let mightNoBts = [];
-
 (async () => {
   try {
 
-    let data = '';
-    fs.writeFile('message.txt', data, (err) => {
-      if (err) throw err;
-      console.log('The file has been saved!');
-    });
-    fs.writeFile('over.txt', data, (err) => {
-      if (err) throw err;
-      console.log('The file has been saved!');
-    });
-    fs.writeFile('surebts.txt', data, (err) => {
-      if (err) throw err;
-      console.log('The file has been created!');
-    });
-    fs.writeFile('sureover.txt', data, (err) => {
-      if (err) throw err;
-      console.log('The file has been created!');
-    });
+    // let data = '';
+    // fs.writeFile('message.txt', data, (err) => {
+    //   if (err) throw err;
+    //   console.log('The file has been saved!');
+    // });
+    // fs.writeFile('over.txt', data, (err) => {
+    //   if (err) throw err;
+    //   console.log('The file has been saved!');
+    // });
+    // fs.writeFile('surebts.txt', data, (err) => {
+    //   if (err) throw err;
+    //   console.log('The file has been created!');
+    // });
+    // fs.writeFile('sureover.txt', data, (err) => {
+    //   if (err) throw err;
+    //   console.log('The file has been created!');
+    // });
 
 
     const browser = await puppeteer.launch({headless: true});
@@ -118,42 +108,42 @@ const fs = require('fs');
       // }
 
       if (h2hs.length > 4 && percent > 65) {
-        data = `<tr><td><h4> ${names}</td> <td>bts yes</h4></td></tr>\n`;
-        fs.appendFile('surebts.txt', data, (err) => {
-          if (err) throw err;
+        // data = `<tr><td><h4> ${names}</td> <td>bts yes</h4></td></tr>\n`;
+        // fs.appendFile('surebts.txt', data, (err) => {
+        //   if (err) throw err;
           predictions.myBts.push(names)
           console.log('Created!');
-        });
+        // });
       } else if (h2hs.length > 4 && percent < 30) {
-        data = `<tr><td><h4> ${names}</td> <td>bts no</h4></td></tr>\n`;
-        fs.appendFile('surebts.txt', data, (err) => {
-          if (err) throw err;
+        // data = `<tr><td><h4> ${names}</td> <td>bts no</h4></td></tr>\n`;
+        // fs.appendFile('surebts.txt', data, (err) => {
+        //   if (err) throw err;
           predictions.myNoBts.push(names)
           console.log('Created!');
-        });
+        // });
       } else if(h2hs.length < 5) {
         if (percent > 65) {
-          data = `<tr><td><h4> ${names}</td> <td>bts yes</h4></td></tr>\n`;
-          fs.appendFile('message.txt', data, (err) => {
-            if (err) throw err;
+          // data = `<tr><td><h4> ${names}</td> <td>bts yes</h4></td></tr>\n`;
+          // fs.appendFile('message.txt', data, (err) => {
+          //   if (err) throw err;
             predictions.mightBts.push(names)
             console.log('The file has been saved!');
-          });
+          // });
         } else {
-          data = `<tr><td><h4> ${names}</td> <td>bts no</h4></td></tr>\n`;
-          fs.appendFile('message.txt', data, (err) => {
-            if (err) throw err;
+          // data = `<tr><td><h4> ${names}</td> <td>bts no</h4></td></tr>\n`;
+          // fs.appendFile('message.txt', data, (err) => {
+          //   if (err) throw err;
             predictions.mightNoBts.push(names)
             console.log('The file has been saved!');
-          });
+          // });
           console.log('no');
         }
       } else {
-        data = `<tr><td><h4> ${names}</td> <td>Undecided</h4></td></tr>\n`;
-        fs.appendFile('message.txt', data, (err) => {
-          if (err) throw err;
+        // data = `<tr><td><h4> ${names}</td> <td>Undecided</h4></td></tr>\n`;
+        // fs.appendFile('message.txt', data, (err) => {
+        //   if (err) throw err;
           console.log('The file has been saved!');
-        });
+        // });
         console.log('Undecided');
       }
 
@@ -169,42 +159,42 @@ const fs = require('fs');
         if (h2hs.length > 4 && avg > 3) {
           console.log(total, 'total')
           console.log(avg, 'avg')
-          let overTwo = `<tr><td><h4>${names}</td> <td>Over 2.5</h4></td></tr>\n`;
-          fs.appendFile('sureover.txt', overTwo, (err) => {
-            overs.push(names)
+          // let overTwo = `<tr><td><h4>${names}</td> <td>Over 2.5</h4></td></tr>\n`;
+          // fs.appendFile('sureover.txt', overTwo, (err) => {
+            // overs.push(names)
             predictions.myOvers.push(names)
-            if (err) throw err;
-            console.log('saved');
-          });
+            // if (err) throw err;
+            // console.log('saved');
+          // });
         } else if (h2hs.length > 4 && avg < 2) {
-          let overTwo = `<tr><td><h4>${names}</td> <td>Under 2.5</h4></td></tr>\n`;
-          fs.appendFile('sureover.txt', overTwo, (err) => {
-            if (err) throw err;
+          // let overTwo = `<tr><td><h4>${names}</td> <td>Under 2.5</h4></td></tr>\n`;
+          // fs.appendFile('sureover.txt', overTwo, (err) => {
+          //   if (err) throw err;
             predictions.myUnders.push(names)
             console.log('saved');
-          });
+          // });
         } else if (h2hs.length < 5) {
           if (avg > 3) {
-            let overTwo = `<tr><td><h4>${names}</td> <td>Over 2.5</h4></td></tr>\n`;
-            fs.appendFile('over.txt', overTwo, (err) => {
-              if (err) throw err;
+            // let overTwo = `<tr><td><h4>${names}</td> <td>Over 2.5</h4></td></tr>\n`;
+            // fs.appendFile('over.txt', overTwo, (err) => {
+            //   if (err) throw err;
               predictions.mightOvers.push(names)
               console.log('saved');
-            });
+            // });
           } else {
-            let overTwo = `<tr><td><h4>${names}</td> <td>Under 2.5</h4></td></tr>\n`;
-            fs.appendFile('over.txt', overTwo, (err) => {
-              if (err) throw err;
+            // let overTwo = `<tr><td><h4>${names}</td> <td>Under 2.5</h4></td></tr>\n`;
+            // fs.appendFile('over.txt', overTwo, (err) => {
+            //   if (err) throw err;
               predictions.mightUnders.push(names)
               console.log('saved');
-            });
+            // });
           }
         } else {
-          let overTwo = `<tr><td><h4>${names}</td> <td>Undecided</h4></td></tr>\n`;
-          fs.appendFile('over.txt', overTwo, (err) => {
-            if (err) throw err;
+          // let overTwo = `<tr><td><h4>${names}</td> <td>Undecided</h4></td></tr>\n`;
+          // fs.appendFile('over.txt', overTwo, (err) => {
+          //   if (err) throw err;
             console.log('saved');
-          });
+          // });
         }
       }
 
