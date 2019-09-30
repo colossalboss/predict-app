@@ -1,0 +1,59 @@
+
+html
+  head
+    title Scraped Headless Browser Resources
+  body
+    h1 Today's Popular Football Predictions
+
+    div
+
+      h2 Expecting Both Teams Not To Score
+
+      for da in data.mightNoBts
+        h4 #{da}
+    div
+
+      h2 Expecting Both Teams To Score
+
+      for da in data.mightBts
+        h4 #{da}
+
+    div
+
+      h2 Likely Over 2.5
+
+      for da in data.mightOvers
+        h4 #{da}
+
+    div
+
+      h2 Likely Under 2.5
+
+      for da in data.mightUnders
+        h4 #{da}
+    div
+
+      h2 More Likely Over 2.5
+
+      for da in data.myOvers
+        h4 #{da}
+
+    div
+
+      h2 More Likely Under 2.5
+
+      for da in data.myUnders
+        h4 #{da}
+    div
+
+      h2 More Likely Both Teams To Score
+
+      ul
+        for pick in data.myBts
+          li #{pick}
+    div
+
+      h2 More Likely Both Teams Not To Score
+
+      for da in data.myNoBts
+        h4 #{da}

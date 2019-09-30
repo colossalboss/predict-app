@@ -1,6 +1,27 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
+  let predictions = {
+    myOvers: [],
+    myUnders: [],
+    myBts: [],
+    myNoBts: [],
+    mightBts: [],
+    mightNoBts: [],
+    mightOvers: [],
+    mightUnders: []
+  };
+
+  // let overs = [];
+  // let myOvers = [];
+  // let myUnders = []
+  // let mightOvers = []
+  // let mightUnders = []
+  // let myBts = []
+  // let myNoBts = []
+  // let mightBts = []
+  // let mightNoBts = [];
+
 (async () => {
   try {
 
@@ -24,7 +45,7 @@ const fs = require('fs');
 
 
     const browser = await puppeteer.launch({headless: true});
-  const page = await browser.newPage();
+    const page = await browser.newPage();
 
     page.setViewport({width: 1150, height: 700});
     await page.goto('http://soccervista.com', {waitUntil: 'networkidle2'});
@@ -63,8 +84,9 @@ const fs = require('fs');
       let bts = 0;
       let percent;
 
+
       for (let h2h of h2hs) {
-        let length;
+        // let length;
 
         if (h2hs.length > 0) {
           let score = await h2h.$('td.h2h > a');
@@ -99,12 +121,14 @@ const fs = require('fs');
         data = `<tr><td><h4> ${names}</td> <td>bts yes</h4></td></tr>\n`;
         fs.appendFile('surebts.txt', data, (err) => {
           if (err) throw err;
+          predictions.myBts.push(names)
           console.log('Created!');
         });
       } else if (h2hs.length > 4 && percent < 30) {
         data = `<tr><td><h4> ${names}</td> <td>bts no</h4></td></tr>\n`;
         fs.appendFile('surebts.txt', data, (err) => {
           if (err) throw err;
+          predictions.myNoBts.push(names)
           console.log('Created!');
         });
       } else if(h2hs.length < 5) {
@@ -112,14 +136,16 @@ const fs = require('fs');
           data = `<tr><td><h4> ${names}</td> <td>bts yes</h4></td></tr>\n`;
           fs.appendFile('message.txt', data, (err) => {
             if (err) throw err;
+            predictions.mightBts.push(names)
             console.log('The file has been saved!');
           });
         } else {
           data = `<tr><td><h4> ${names}</td> <td>bts no</h4></td></tr>\n`;
-              fs.appendFile('message.txt', data, (err) => {
-                if (err) throw err;
-                console.log('The file has been saved!');
-              });
+          fs.appendFile('message.txt', data, (err) => {
+            if (err) throw err;
+            predictions.mightNoBts.push(names)
+            console.log('The file has been saved!');
+          });
           console.log('no');
         }
       } else {
@@ -141,8 +167,12 @@ const fs = require('fs');
         let total =  sum.reduce((a, b) => Number(a) + Number(b));
         let avg = Math.floor(total / h2hs.length);
         if (h2hs.length > 4 && avg > 3) {
+          console.log(total, 'total')
+          console.log(avg, 'avg')
           let overTwo = `<tr><td><h4>${names}</td> <td>Over 2.5</h4></td></tr>\n`;
           fs.appendFile('sureover.txt', overTwo, (err) => {
+            overs.push(names)
+            predictions.myOvers.push(names)
             if (err) throw err;
             console.log('saved');
           });
@@ -150,6 +180,7 @@ const fs = require('fs');
           let overTwo = `<tr><td><h4>${names}</td> <td>Under 2.5</h4></td></tr>\n`;
           fs.appendFile('sureover.txt', overTwo, (err) => {
             if (err) throw err;
+            predictions.myUnders.push(names)
             console.log('saved');
           });
         } else if (h2hs.length < 5) {
@@ -157,12 +188,14 @@ const fs = require('fs');
             let overTwo = `<tr><td><h4>${names}</td> <td>Over 2.5</h4></td></tr>\n`;
             fs.appendFile('over.txt', overTwo, (err) => {
               if (err) throw err;
+              predictions.mightOvers.push(names)
               console.log('saved');
             });
           } else {
             let overTwo = `<tr><td><h4>${names}</td> <td>Under 2.5</h4></td></tr>\n`;
             fs.appendFile('over.txt', overTwo, (err) => {
               if (err) throw err;
+              predictions.mightUnders.push(names)
               console.log('saved');
             });
           }
@@ -177,12 +210,15 @@ const fs = require('fs');
 
 
     }
-    await browser.close();
 
+    await browser.close();
 
   } catch (e) {
     console.log('Our error', e);
   }
+  console.log(predictions, 'pred');
+  return predictions;
 
 })();
 
+module.exports = predictions
