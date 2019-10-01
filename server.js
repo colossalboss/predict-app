@@ -1,14 +1,13 @@
-const express = require('express')
+const express = require('express');
 
 // import {predictions} from './utils/app';
 
 const picks = require('./utils/app')
-const app = express()
+const app = express();
 
-app.set('view engine', 'pug')
+app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
-  console.log(picks)
   let response = new Promise((resolve, reject) => {
     let val = picks;
     resolve(val);
@@ -18,31 +17,7 @@ app.get('/', (req, res) => {
 
     return res.render('index', {data: data});
   })
-  // const mediumArticles = new Promise((resolve, reject) => {
-  //   scraper
-  //     .scrapeMedium()
-  //     .then(data => {
-  //       resolve(data)
-  //     })
-  //     .catch(err => reject('Medium scrape failed'))
-  // })
-
-  // const youtubeVideos = new Promise((resolve, reject) => {
-  //   scraper
-  //     .scrapeYoutube()
-  //     .then(data => {
-  //       resolve(data)
-  //     })
-  //     .catch(err => reject('YouTube scrape failed'))
-  // })
-
-  // Promise.all([mediumArticles, youtubeVideos])
-  //   .then(data => {
-  //     res.render('index', { data: { articles: data[0], videos: data[1] } })
-  //   })
-  //   .catch(err => res.status(500).send(err))
+  .catch(err => console.log('The Error' + err))
 })
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('LISTENING ON 3000))');
-});
+app.listen(process.env.PORT || 4000, () => console.log('LISTENING ON 4000'));
